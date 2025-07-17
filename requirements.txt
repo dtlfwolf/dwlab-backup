@@ -1,0 +1,2 @@
+-e ../dwlab-basicpy/
+-r ./../dwlab-basicpy/requirements.txt

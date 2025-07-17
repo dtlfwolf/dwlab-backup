@@ -1,0 +1,68 @@
+backupPackages:
+- backupFrequency: daily
+  backupGenerations: 7
+  backupJobs:
+  - backupCommand: /opt/dwlab/dwlab-backupclient/commands/dwlabbackup-omdbackup_local.py
+      --omdInstance cmkdev --backupFile /backup/cmk-dev.dw-lab.com_omdSiteBackup/omdBackup_cmkdev_local.tar.gz
+    backupCommandParameters: ''
+    backupCommmandUser: root
+    backupJobName: omdBackup_cmkdev_local
+  - backupCommand: /opt/dwlab/dwlab-backupclient/commands/dwlabbackup-omdbackup_remote.py
+      --omdRemoteHost dwlabhome.cmk-dev.dw-lab.com --omdInstance dwlabhome --backupFile
+      /backup/cmk-dev.dw-lab.com_omdSiteBackup/omdBackup_dwlabhome_tcp.tar.gz
+    backupCommandParameters: ''
+    backupCommmandUser: root
+    backupJobName: omdBackup_dwlabhome_tcp
+  - backupCommand: /opt/dwlab/dwlab-backupclient/commands/dwlabbackup-omdbackup_remote.py
+      --omdRemoteHost dwlabfritz.cmk-dev.dw-lab.com --omdInstance dwlabfritz --backupFile
+      /backup/cmk-dev.dw-lab.com_omdSiteBackup/omdBackup_dwlabfritz_tcp.tar.gz
+    backupCommandParameters: ''
+    backupCommmandUser: root
+    backupJobName: omdBackup_dwlabfritz_tcp
+  backupPackageName: cmk-dev.dw-lab.com_omdSiteBackup
+- backupFrequency: weekly
+  backupGenerations: 4
+  backupJobs:
+  - backupCommand: /opt/dwlab/dwlab-backupclient/commands/dwlabbackup-tar.py cvzf
+      /backup/cmk-dev.dw-lab.com_cmkSiteDefinitionBackup/generatedSoftwarePackages.tar.gz
+      /opt/dwlab/dwlab-cmkcentralserver/packages
+    backupCommandParameters: ''
+    backupCommmandUser: root
+    backupJobName: generatedSoftwarePackages
+  - backupCommand: /opt/dwlab/dwlab-backupclient/commands/dwlabbackup-tar.py cvzf
+      /backup/cmk-dev.dw-lab.com_cmkSiteDefinitionBackup/generatedInstances.tar.gz
+      /opt/dwlab/dwlab-cmkcentralserver/instances
+    backupCommandParameters: ''
+    backupCommmandUser: root
+    backupJobName: generatedInstances
+  backupPackageName: cmk-dev.dw-lab.com_cmkSiteDefinitionBackup
+- backupFrequency: weekly
+  backupGenerations: 4
+  backupJobs:
+  - backupCommand: /opt/dwlab/dwlab-backupclient/commands/dwlabbackup-tar.py cvzf
+      /backup/dwlab-cmk-dev.cmk-dev.dw-lab.com_ovpnBackup/saveOpenVPN.tar.gz /opt/dwlab/dwlab-ovpn/
+    backupCommandParameters: ''
+    backupCommmandUser: root
+    backupJobName: saveOpenVPN
+  backupPackageName: dwlab-cmk-dev.cmk-dev.dw-lab.com_ovpnBackup
+clientSettings:
+  backupFileServerPassword: <as required>
+  backupFileServerUser: <Username>
+  backupMountPoint: /backup
+  backupMountType: nfs
+  backupRemoteDir: /data/backup
+  backupRemoteHost: dwlab-central-01.dw-lab.de
+  backupUser: backup
+  backupUserGID: 34
+  backupUserGroup: backup
+  backupUserID: 34
+  backupUserLoginAuthorizedKey: <drop your key>
+configFile: /opt/dwlab/dwlab-backupclient/etc/dwlabBackupClientConfig.yaml
+env:
+  dwlab_home: /opt/dwlab
+  dwlab_package: dwlab-basicservices
+  dwlab_package_home: /opt/dwlab/dwlab-basicservices
+  dwlab_src_home: /opt/dwlab/dwlab-basicservices/src
+  fqdn: dwlab-cmk-dev.cmk-dev.dw-lab.com
+  hostIP: 10.8.97.1
+  hostname: dwlab-cmk-dev

@@ -1,0 +1,30 @@
+version: 1
+disable_existing_loggers: False
+formatters:
+  simple:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  detailed:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(module)s - %(message)s'
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: detailed
+    stream: ext://sys.stdout
+
+  file_handler:
+    class: logging.FileHandler
+    level: DEBUG
+    formatter: detailed
+    filename: '/var/log/dwlab.log'
+
+loggers:
+  dwlab_backupClient:
+    level: DEBUG
+    handlers: [console, file_handler]
+    propagate: no
+
+root:
+  level: INFO
+  handlers: [console, file_handler]
