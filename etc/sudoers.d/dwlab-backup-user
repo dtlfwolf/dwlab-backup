@@ -1,4 +1,0 @@
-Cmnd_Alias BACKUP_CMDS = /opt/dwlab/dwlab-backupclient/commands/dwlabbackup-tar.py, /opt/dwlab/dwlab-backupclient/commands/dwlabbackup-omdbackup_local.py, /opt/dwlab/dwlab-backupclient/commands/dwlabbackup-omdbackup_remote.py
-
-__backupUser ALL=(ALL) NOPASSWD: BACKUP_CMDS
-
