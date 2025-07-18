@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 import subprocess
 
-from dwlab_basicpy import dwlabRuntimeEnvironment as dwlab
+from dwlab_basicpy import dwlabRuntimeEnvironment
 from dwlab_basicpy import dwlabSettings
 
 import logging
@@ -85,7 +85,7 @@ class backupFile:
         return
     
 class backupClient:
-    def __init__(self):
+    def __init__(self, env=None, clientSettings=None, configFile=None, backupPackages=None):
         function_name = sys._getframe().f_code.co_name
         class_name=self.__class__.__name__
         function_name=class_name+"."+function_name
@@ -96,31 +96,34 @@ class backupClient:
         self._configFile=None
         self._backupPackages=[]
 
-        try:
-            self._env=dwlab.dwlabRuntimeEnvironment()
-        except Exception as e:
-            logger.error("Cannot determine runtime environment.")
-            raise(e)
+        if isinstance(env, dwlabRuntimeEnvironment):
+            self._env=env
+            settingsFile=Path.joinpath(self._env.dwlab_package_home,
+                                        "etc",
+                                        "dwlabBackupClientSettings.yaml"
+                                    )
+            try:
+                self._clientSettings=dwlabSettings.read_yaml(settingsFile)
+            except Exception as e:
+                logger.error("Cannot read installation setting.")
+                raise(e)
+            self._configFile=Path.joinpath(
+                self._env.dwlab_package_home,
+                "etc",
+                "dwlabBackupClientConfig.yaml"
+            )
+        if isinstance(clientSettings, dwlabSettings):
+            if isinstance(env, dwlabRuntimeEnvironment):
+                if self._clientSettings != clientSettings:
+                    logger.error("Given client settings are not equal to the settings in the configuration file. Please check your code.")
+                    raise ValueError("Given client settings are not equal to the settings in the configuration file. Please check your code.")
+            else:
+                self._clientSettings=clientSettings
 
-        settingsFile=Path.joinpath(self._env.dwlab_package_home,
-                                    "etc",
-                                    "dwlabBackupClientSettings.yaml"
-                                )
-        try:
-            self._clientSettings=dwlabSettings.read_yaml(settingsFile)
-        except Exception as e:
-            logger.error("Cannot read installation setting.")
-            raise(e)
-        
-        self._configFile=Path.joinpath(
-            self._env.dwlab_package_home,
-            "etc",
-            "dwlabBackupClientConfig.yaml"
-        )
         try:
             configuration=dwlabSettings.read_yaml(self._configFile)
             configSettings=configuration.data
-            self._env=dwlab.dwlabRuntimeEnvironment.from_dict(configSettings["env"])
+            self._env=dwlabRuntimeEnvironment.from_dict(configSettings["env"])
             self._clientSettings=dwlabSettings(configSettings["clientSettings"])
             self._configFile=Path(configSettings["configFile"])
             backupPackagesDict=configSettings["backupPackages"]
@@ -449,7 +452,7 @@ class backupClient:
             logger.error("backupClientDict is not a dict")
             raise TypeError("backupClientDict is not a dict")
 
-        cls._env=dwlab.dwlabRuntimeEnvironment.from_dict(backupClientDict.get("env",dict()))
+        cls._env=dwlabRuntimeEnvironment.from_dict(backupClientDict.get("env",dict()))
         cls._clientSettings=dwlabSettings(backupClientDict.get("clientSettings",dict()))
         cls._configFile=Path(backupClientDict.get("configFile",""))
         
