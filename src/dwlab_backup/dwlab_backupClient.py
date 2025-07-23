@@ -13,6 +13,7 @@ import logging
 from dwlab_basicpy import dwlabLogger
 dwlabLogger.setup_logging()
 logger=logging.getLogger(__name__)
+__PACKAGE_NAME__ = "dwlab-backupclient"
 
 
 class backupFile:
@@ -97,10 +98,17 @@ class backupClient:
         self._backupPackages=[]
 
         if isinstance(env, dwlabRuntimeEnvironment):
+
             self._env=env
-            settingsFile=Path.joinpath(self._env.dwlab_package_home,
-                                        "etc",
-                                        "dwlabBackupClientSettings.yaml"
+            if self._env._dwlab_package != "dwlab-backupclient":
+                logger.info("The given environment is not a dwlab-backupclient environment.")
+                logger.info("Switching to dwlab-backupclient environment.")
+                
+
+            settingsFile=Path.joinpath(self._env.dwlab_home,
+                                       __PACKAGE_NAME__,
+                                       "etc",
+                                       "dwlabBackupClientSettings.yaml"
                                     )
             try:
                 self._clientSettings=dwlabSettings.read_yaml(settingsFile)
@@ -108,7 +116,8 @@ class backupClient:
                 logger.error("Cannot read installation setting.")
                 raise(e)
             self._configFile=Path.joinpath(
-                self._env.dwlab_package_home,
+                self._env.dwlab_home,
+                __PACKAGE_NAME__,
                 "etc",
                 "dwlabBackupClientConfig.yaml"
             )
