@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="dwlab-backup",
+    name="dwlab_backup",
     version="0.6.1",
     packages=find_packages(),
     scripts=[],

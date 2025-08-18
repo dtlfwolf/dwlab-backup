@@ -1,3 +1,4 @@
--e ../dwlab-basicpy/
--r ./../dwlab-basicpy/requirements.txt
+setuptools
+-e ../dwlab_basicpy/
+-r ./../dwlab_basicpy/requirements.txt
 

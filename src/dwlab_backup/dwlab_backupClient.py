@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 #
 import os
 import pwd
@@ -6,11 +5,11 @@ import sys
 from pathlib import Path
 import subprocess
 
-from dwlab-basicpy import dwlabRuntimeEnvironment
-from dwlab-basicpy import dwlabSettings
+from dwlab_basicpy import dwlabRuntimeEnvironment
+from dwlab_basicpy import dwlabSettings
 
 import logging
-from dwlab-basicpy import dwlabLogger
+from dwlab_basicpy import dwlabLogger
 dwlabLogger.setup_logging()
 logger=logging.getLogger(__name__)
 __PACKAGE_NAME__ = "dwlab-backupclient"
