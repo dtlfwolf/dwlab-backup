@@ -1,0 +1,6 @@
+setup.py
+dwlabbackup.egg-info/PKG-INFO
+dwlabbackup.egg-info/SOURCES.txt
+dwlabbackup.egg-info/dependency_links.txt
+dwlabbackup.egg-info/requires.txt
+dwlabbackup.egg-info/top_level.txt

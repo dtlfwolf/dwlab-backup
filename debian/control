@@ -1,4 +1,4 @@
-Source: dwlab-backup
+Source: dwlabbackup
 Section: utils
 Priority: optional
 Maintainer: DW-Lab GmbH <monitoring@dw-lab.com>
@@ -6,8 +6,8 @@ Build-Depends: debhelper (>= 11), dh-python, python3, python3-setuptools
 Standards-Version: 4.5.0
 Homepage: https://www.dw-lab.org
 
-Package: dwlab-backup
+Package: dwlabbackup
 Architecture: all
-Depends: ${misc:Depends}, ${python3:Depends}, python3-venv | python3.12-venv | python3.10-venv, python3-pip, dwlab-basicpy
+Depends: ${misc:Depends}, ${python3:Depends}, python3-venv | python3.12-venv | python3.10-venv, python3-pip, dwlabbasicpy
 Description: DW-Lab Backup -- Python3 routines
  This package implements the DW-Lab Backup Routines for the DW-Lab implementation.

@@ -5,14 +5,14 @@ import sys
 from pathlib import Path
 import subprocess
 
-from dwlab_basicpy import dwlabRuntimeEnvironment
-from dwlab_basicpy import dwlabSettings
+from dwlabbasicpy import dwlabRuntimeEnvironment
+from dwlabbasicpy import dwlabSettings
 
 import logging
-from dwlab_basicpy import dwlabLogger
+from dwlabbasicpy import dwlabLogger
 dwlabLogger.setup_logging()
 logger=logging.getLogger(__name__)
-__PACKAGE_NAME__ = "dwlab-backupclient"
+__PACKAGE_NAME__ = "dwlabbackup"
 
 
 class backupFile:
@@ -646,7 +646,7 @@ class backupPackage:
             "monthly": "0 0 1 * *"
         }.get(self._backupFrequency, "0 0 * * *")  # Default to daily if invalid
         
-        cron_job = f"{cron_time} dwlab_backupPackage.py {self._backupPackageName}"
+        cron_job = f"{cron_time} dwlabbackupPackage.py {self._backupPackageName}"
         
         try:
             user_cron_file = f"/var/spool/cron/crontabs/{backupUser}"

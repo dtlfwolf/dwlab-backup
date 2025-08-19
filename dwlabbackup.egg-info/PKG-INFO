@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: dwlabbackup
+Version: 0.6.1
+Requires-Dist: dwlabbasicpy>=0.6.1
+Dynamic: requires-dist
