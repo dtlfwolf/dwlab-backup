@@ -1,4 +1,6 @@
 setup.py
+dwlabbackup/__init__.py
+dwlabbackup/dwlab_backup.py
 dwlabbackup.egg-info/PKG-INFO
 dwlabbackup.egg-info/SOURCES.txt
 dwlabbackup.egg-info/dependency_links.txt
