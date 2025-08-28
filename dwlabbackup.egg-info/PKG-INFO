@@ -1,5 +1,9 @@
 Metadata-Version: 2.4
 Name: dwlabbackup
-Version: 0.6.1
-Requires-Dist: dwlabbasicpy>=0.6.1
-Dynamic: requires-dist
+Version: 0.7.0
+Summary: DW-Lab Backup
+Author-email: Detlef Wolf <detlef.wolf@dw-lab.de>
+Project-URL: Homepage, https://github.com/dtlfwolf/dwlab-backup
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.0
